@@ -50,7 +50,7 @@ A Tabela a seguir contém as Histórias de Usuárias para o desenvolvimento do p
          <tr>
             <span id="ustory-06"></span>
             <td style="border-style:solid;border-width:1px;text-align:center;vertical-align:middle" rowspan="1">US06</td>
-            <td style="border-style:solid;border-width:1px;text-align:center;vertical-align:middle" rowspan="1">Eu,como usuário regular, desejo ter acesso a um menu expansível em que vai me permitir ir para algumas telas específicas com a intenção de verificar informações como eventos que mostrei interesse em participar, meu perfil caso eu queira verificar alguma informação (nome, email ou senha), uma opção que vai permitir verificar as informações de contato com os responsáveis pelo aplicativo e por fim, uma botão que vai fazer o logout da minha conta </td>
+            <td style="border-style:solid;border-width:1px;text-align:center;vertical-align:middle" rowspan="1">Eu,como usuário regular, desejo ter acesso a um menu expansível em que vai me permitir ir para algumas telas específicas com a intenção de verificar informações como eventos que mostrei interesse em participar, cadastro/alteração de eventos, meu perfil caso eu queira verificar alguma informação (nome, email ou senha), uma opção que vai permitir verificar as informações de contato com os responsáveis pelo aplicativo e por fim, uma botão que vai fazer o logout da minha conta </td>
             <td style="border-style:solid;border-width:1px;text-align:center;vertical-align:middle" rowspan="1"><ol><li>O menu expansível pode ocupar toda a tela ou não, mas deve ficar claro quando ele estiver sendo usado ou não</li><li>Na situação dele não ocupar completamente a tela, o que não estiver sendo utilizado por ele deve ficar escurecido para dar mais destaque ao menu expansível</li><li>Esse menu vai ficar disponível em toda a aplicação com exceção das telas de Login e Registro</li></ol></td>
             <td style="border-style:solid;border-width:1px;text-align:center;vertical-align:middle">Alta</td>
         </tr>
@@ -76,10 +76,17 @@ A Tabela a seguir contém as Histórias de Usuárias para o desenvolvimento do p
             <td style="border-style:solid;border-width:1px;text-align:center;vertical-align:middle">Baixa</td>
         </tr>
         <tr>
-            <span id="ustory-09"></span>
+            <span id="ustory-10"></span>
             <td style="border-style:solid;border-width:1px;text-align:center;vertical-align:middle" rowspan="1">US10</td>
             <td style="border-style:solid;border-width:1px;text-align:center;vertical-align:middle" rowspan="1">Eu,como usuário regular, desejo ter a possibilidade de fazer logout do aplicativo</td>
             <td style="border-style:solid;border-width:1px;text-align:center;vertical-align:middle" rowspan="1"><ol><li>A função deve levar o usuário a tela de Login</li></ol></td>
+            <td style="border-style:solid;border-width:1px;text-align:center;vertical-align:middle">Baixa</td>
+        </tr>
+                <tr>
+            <span id="ustory-11"></span>
+            <td style="border-style:solid;border-width:1px;text-align:center;vertical-align:middle" rowspan="1">US11</td>
+            <td style="border-style:solid;border-width:1px;text-align:center;vertical-align:middle" rowspan="1">Eu,como usuário regular, desejo ter a possibilidade de cadastrar, alterar ou excluir um evento do sistema</td>
+            <td style="border-style:solid;border-width:1px;text-align:center;vertical-align:middle" rowspan="1"><ol><li>Os únicos que podem fazer alterações são o usuário que criou o evento e o administrador do aplicativo</li><li>Deve ser possível preencher informações como título do evento, data e horário em que vão acontecer, local que vai ocorrer se for presencial</li><li>No caso de um evento remoto, deve ser possível colocar o link da plataforma para que o usuário possa acessar pelo celular</li><li>Deve ser possível colocar uma imagem para o evento, mas não obrigatório</li><li>Deve ter um campo para colocar informações adicionais que não entrariam em nenhuma das anteriores. O seu preenchimento não é obrigatório</li></ol></td>
             <td style="border-style:solid;border-width:1px;text-align:center;vertical-align:middle">Baixa</td>
         </tr>
 </table>
