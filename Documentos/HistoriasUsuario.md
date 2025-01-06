@@ -9,7 +9,6 @@ A Tabela a seguir contém as Histórias de Usuárias para o desenvolvimento do p
             <th style="border-style:solid;border-width:1px;text-align:center">História de Usuário</th>
             <th style="border-style:solid;border-width:1px;text-align:center">Critérios de aceitação</th>
             <th style="border-style:solid;border-width:1px;text-align:center">Prioridade</th>
-            <th style="border-style:solid;border-width:1px;text-align:center">RF/RNF relacionado</th>
         </tr>
     </thead>
     <tbody>
