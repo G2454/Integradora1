@@ -1,8 +1,12 @@
 import { View, Text, StyleSheet, Image, TouchableOpacity, TextInput} from 'react-native'
 import {useState} from 'react'
 import {Octicons} from '@expo/vector-icons'
+import { useNavigation, NavigationProp } from '@react-navigation/native'
 
 export default function LoginScreen() {
+
+  const navigation = useNavigation();
+
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [passwordVisible, setPasswordVisible] = useState(false); // Estado para alternar visibilidade da senha
@@ -61,8 +65,10 @@ export default function LoginScreen() {
         </TouchableOpacity>
       </View>
 
-      <Text style={styles.TextBottom}>Não tem conta?  
-        <Text style={styles.TextBottomCreate}> Crie agora!</Text>      
+      <Text style={styles.TextBottom}>Não tem conta? {''}
+        <TouchableOpacity onPress={() => navigation.navigate('Register')}> 
+          <Text style={styles.TextBottomCreate}>Crie agora!</Text>
+        </TouchableOpacity>      
       </Text>
 
     </View>
@@ -72,7 +78,7 @@ export default function LoginScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#FFF",
+    backgroundColor: "#FFF", //branco
     padding: 25,
     //justifyContent: "center",
     alignItems: "center",
@@ -94,7 +100,7 @@ const styles = StyleSheet.create({
     paddingRight: 10,
   },
   button: {
-    backgroundColor: "#FFD545", //#FFD545
+    backgroundColor: "#FFD545", //#FFD545 amarelo
     width: 200,
     height: 55,
     alignItems: "center",
@@ -127,7 +133,7 @@ const styles = StyleSheet.create({
     borderRadius: 18,
   },
   boxInput: {
-    backgroundColor: "#F2F2F2", //#F2F2F2
+    backgroundColor: "#F2F2F2", //#F2F2F2 cinza claro
     width: 332,
     height: 55,
     alignItems: "center",
@@ -144,7 +150,9 @@ const styles = StyleSheet.create({
   TextBottom: {
     marginTop: 200,
   },
-  /*TextBottomCreate: {
-    color: "",
-  },*/
+  TextBottomCreate: {
+    color: "#FFD545",
+    fontWeight: "bold",
+    marginBottom: "-4.5",
+  },
 })

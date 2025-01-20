@@ -2,7 +2,6 @@ import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-nativ
 import {useState} from 'react'
 import {Octicons} from '@expo/vector-icons'
 
-/* Lembrar de passar a tela de registro pra de baixo da de login no app,js */
 
 export default function RegisterScreen() {
   return(
