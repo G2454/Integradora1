@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet, Image, TouchableOpacity, TextInput} from 'react-native'
 import {useState} from 'react'
 import {Octicons} from '@expo/vector-icons'
-import { useNavigation, NavigationProp } from '@react-navigation/native'
+import { useNavigation } from '@react-navigation/native'
 
 export default function LoginScreen() {
 
@@ -44,7 +44,7 @@ export default function LoginScreen() {
           onChangeText={(text) => setPassword(text)}
           value={password}
         />
-        <TouchableOpacity onPress={() => setPasswordVisible(!passwordVisible)} style={styles.iconButton}>
+        <TouchableOpacity onPress={() => setPasswordVisible(!passwordVisible)} style={styles.iconEyeButton}>
           <Octicons 
             name={passwordVisible ? "eye" : "eye-closed"}
             size = {18}
@@ -70,7 +70,6 @@ export default function LoginScreen() {
           <Text style={styles.TextBottomCreate}>Crie agora!</Text>
         </TouchableOpacity>      
       </Text>
-
     </View>
   )
 }
@@ -94,15 +93,15 @@ const styles = StyleSheet.create({
     marginTop: -65,
     marginBottom: 20,
   },
-  iconButton: {
+  iconEyeButton: {
     position: "absolute",
     right: 10,
     paddingRight: 10,
   },
   button: {
     backgroundColor: "#FFD545", //#FFD545 amarelo
-    width: 200,
-    height: 55,
+    width: 270,
+    height: 60,
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 18,
@@ -151,7 +150,7 @@ const styles = StyleSheet.create({
     marginTop: 200,
   },
   TextBottomCreate: {
-    color: "#FFD545",
+    color: "#0000FF",
     fontWeight: "bold",
     marginBottom: "-4.5",
   },
