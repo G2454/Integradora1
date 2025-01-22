@@ -3,6 +3,7 @@ KeyboardAvoidingView, Platform, ScrollView, SafeAreaView, StatusBar } from 'reac
 import {useState} from 'react'
 import {Octicons} from '@expo/vector-icons'
 import { useNavigation } from '@react-navigation/native'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 export default function RegisterScreen() {
 
@@ -13,6 +14,32 @@ export default function RegisterScreen() {
   const [password2, setPassword2] = useState('')
   const [passwordVisible, setPasswordVisible] = useState(false) // Estado para alternar visibilidade da senha
   const [passwordVisible2, setPasswordVisible2] = useState(false)
+  /*const handleRegister = async () => {
+    if (!name || !email || !password || !password2) {
+      alert('Preencha todos os campos!')
+      return
+    }
+  
+    if (password !== password2) {
+      alert('As senhas não coincidem!')
+      return
+    }
+  
+    try {
+      // Salva os dados do usuário no AsyncStorage
+      const userData = { name, email, password }
+      await AsyncStorage.setItem(email, JSON.stringify(userData))
+  
+      alert('Conta criada com sucesso!')
+      navigation.navigate('Login')
+    } catch (error) {
+      console.error('Erro ao salvar os dados:', error)
+      alert('Erro ao criar conta. Tente novamente.')
+      }
+  }*/
+
+
+     // ou usa onPress=handleRegister na linha 145 se quiser usar a função de cima
 
   return(
     <SafeAreaView style={{flex: 1}}>
@@ -29,7 +56,7 @@ export default function RegisterScreen() {
             <TouchableOpacity onPress={() => navigation.navigate('Login')} style={styles.ReturnButton}>
               <Octicons
                 name={"arrow-left"}
-                size={25}
+                size={30}
                 color="#000"
               />
             </TouchableOpacity>
@@ -115,11 +142,11 @@ export default function RegisterScreen() {
             </View>
 
             <View style={styles.buttonPosition}  resizeMode='contain'>
-              <TouchableOpacity style={styles.button}>
+              <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Login')}> 
                 <Text style={styles.buttonText}> CRIAR CONTA </Text>
               </TouchableOpacity>
             </View>
-
+          
             <View style={styles.OUbox}>
               <Text style={{fontSize:16, color:"#9D9898" /*cinza claro*/}}>OU</Text>
             </View>
@@ -151,7 +178,6 @@ const styles = StyleSheet.create({
     marginTop: -65,
     marginBottom: 15,
     width: 30,
-    paddingRight: 15,
   },
   RegisterBox: {
     //backgroundColor: "red",

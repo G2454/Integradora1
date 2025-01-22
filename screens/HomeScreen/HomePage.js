@@ -3,11 +3,11 @@ KeyboardAvoidingView, Platform, ScrollView, SafeAreaView, StatusBar } from 'reac
 import {useState} from 'react'
 import {Octicons} from '@expo/vector-icons'
 import { useNavigation } from '@react-navigation/native'
+    
+export default function HomeScreen() {
 
-export default function PasswordScreen() {
-
-    const [email, setEmail] = useState('')
-
+    const navigation = useNavigation()
+    
     return(
         <SafeAreaView style={{flex: 1}}>
             <StatusBar barStyle="dark-content" backgroundColor="#fff" />
@@ -19,27 +19,38 @@ export default function PasswordScreen() {
                 keyboardShouldPersistTaps="handled"
                 >
                     <View style={styles.container}>
+                        <TouchableOpacity onPress={() => navigation.navigate('Login')} style={styles.ReturnButton}>
+                            <Octicons
+                                name={"arrow-left"}
+                                size={30}
+                                color="#000"
+                            />
+                        </TouchableOpacity>
 
-                        <View>
-                            <Text>olá mundo</Text>
-                        </View>
-
+                        <Text> olá mundo </Text>
 
                     </View>
                 </ScrollView>
             </KeyboardAvoidingView>
         </SafeAreaView>
-
+    
     )
 }
-
+    
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#FFF", //branco
-        padding: 25,
-        //justifyContent: "center",
+        backgroundColor: '#fff', 
+        justifyContent: 'center',
         alignItems: "center",
-      },
-
+        padding: 25,
+        paddingBottom: 380,
+    },
+    ReturnButton:{
+        alignSelf: "flex-start",
+        marginTop: -65,
+        marginBottom: 15,
+        width: 30,
+        paddingRight: 5,
+    },
 })

@@ -11,6 +11,35 @@ export default function LoginScreen() {
   const [password, setPassword] = useState('')
   const [passwordVisible, setPasswordVisible] = useState(false); // Estado para alternar visibilidade da senha
 
+  /*const handleLogin = async () => {
+    if (!email || !password) {
+      alert('Preencha todos os campos!');
+      return;
+    }
+  
+    try {
+      const userData = await AsyncStorage.getItem(email);
+  
+      if (userData) {
+        const user = JSON.parse(userData);
+  
+        if (user.password === password) {
+          alert(`Bem-vindo(a), ${user.name}!`);
+          navigation.navigate('Home'); // Navega para a tela inicial do app
+        } else {
+          alert('Senha incorreta!');
+        }
+      } else {
+        alert('E-mail não registrado!');
+      }
+    } catch (error) {
+      console.error('Erro ao fazer login:', error);
+      alert('Erro ao fazer login. Tente novamente.');
+    }
+  }*/
+
+    // ou usa onPress=handleLogin na linha 93 se quiser usar a função de cima
+
   return (
     <View style = {styles.container}>
       <View style = {styles.logo}>
@@ -61,7 +90,7 @@ export default function LoginScreen() {
       </TouchableOpacity>
 
       <View style={styles.buttonPosition}  resizeMode='contain'>
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('HomePage')}> 
           <Text style={styles.buttonText}> ENTRAR </Text>
         </TouchableOpacity>
       </View>
@@ -143,20 +172,20 @@ const styles = StyleSheet.create({
     flexDirection: "row-reverse",
   },
   TextPassword: {
-    marginTop: 15,
-    alignSelf: "flex-end",
-    paddingRight: 10,
+    marginTop: 10,
+    paddingRight: 5,
   },
   BoxPassword: {
-    backgroundColor: "red",
-    alignSelf: "flex-end",
+    //backgroundColor: "red",
     width: "40%",
-    height: 40,
-
+    height: "5%",
+    justifyContent: "flex-end",
+    marginTop: 5,
+    flexDirection: "row",
+    marginLeft: 200,
   },
   TextBottom: {
-    marginTop: 200,
-    backgroundColor: "red",
+    marginTop: 180,
   },
   TextBottomCreate: {
     color: "#0000FF",
