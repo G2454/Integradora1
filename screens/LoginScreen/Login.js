@@ -56,8 +56,9 @@ export default function LoginScreen() {
           source={require("../../src/assets/Password.png")}
         />
       </View>
-
-      <Text style={styles.TextPassword}>Esqueceu a senha?</Text>
+      <TouchableOpacity style={styles.BoxPassword} onPress={() => navigation.navigate('ConfirmEmail')}>
+        <Text style={styles.TextPassword}>Esqueceu a senha?</Text>
+      </TouchableOpacity>
 
       <View style={styles.buttonPosition}  resizeMode='contain'>
         <TouchableOpacity style={styles.button}>
@@ -146,8 +147,16 @@ const styles = StyleSheet.create({
     alignSelf: "flex-end",
     paddingRight: 10,
   },
+  BoxPassword: {
+    backgroundColor: "red",
+    alignSelf: "flex-end",
+    width: "40%",
+    height: 40,
+
+  },
   TextBottom: {
     marginTop: 200,
+    backgroundColor: "red",
   },
   TextBottomCreate: {
     color: "#0000FF",
