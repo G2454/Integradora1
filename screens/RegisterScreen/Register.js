@@ -249,6 +249,4 @@ const styles = StyleSheet.create({
     marginBottom: "-4.5",
     fontSize: 15,
   },
-
-
 })

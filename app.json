@@ -4,11 +4,11 @@
     "slug": "UTFEventos",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./src/assets/SplashLogo.png",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
     "splash": {
-      "image": "./assets/splash-icon.png",
+      "image": "./src/assets/SplashLogo.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },

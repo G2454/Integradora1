@@ -27,7 +27,7 @@ export default function HomeScreen() {
                             />
                         </TouchableOpacity>
 
-                        <Text> olá mundo </Text>
+                        <Text> Bem vindo a HomePage :D </Text>
 
                     </View>
                 </ScrollView>

@@ -172,6 +172,7 @@ const styles = StyleSheet.create({
     flexDirection: "row-reverse",
   },
   TextPassword: {
+    color: "#0000FF",
     marginTop: 10,
     paddingRight: 5,
   },
