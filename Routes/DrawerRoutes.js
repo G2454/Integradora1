@@ -25,26 +25,23 @@ function LogoutScreen({ navigation }) {
 
 export default function DrawerRoutes() {
   return (
-    <Drawer.Navigator initialRouteName="Home" drawerStyle={{ width: '100%' }}>
+    <Drawer.Navigator>
       <Drawer.Screen
-        name="Meu Perfil"
-        component={StackRoutes}
-        options={{ title: 'Meu Perfil', headerShown: false }}
-      />
-      <Drawer.Screen
-        name="Home"
+        name="Home "
         component={HomeScreen}
-        options={{ title: 'Todos os eventos', headerTitle: 'Eventos' }}
+        options={{ title: 'Todos os eventos', headerTitle: 'Eventos principais'}}
       />
+
       <Drawer.Screen
         name="Contact"
         component={StackRoutes}
         options={{ title: 'Contato', headerShown: false }}
       />
+
       <Drawer.Screen
-        name="Logout"
-        component={LogoutScreen}
-        options={{ title: 'Logout', headerShown: false }}
+        name="Log out"
+        component={LogoutScreen} // Usa o componente customizado para logout
+        options={{ title: 'Sair', headerShown: false, swipeEnabled: false, gestureEnabled: false }}
       />
     </Drawer.Navigator>
   );

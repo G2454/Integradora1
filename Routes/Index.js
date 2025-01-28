@@ -16,20 +16,7 @@ export default function Routes() {
         <Stack.Screen name="Register" component={RegisterScreen}/> 
         <Stack.Screen name="ConfirmEmail" component={ForgotPasswordScreen}/>
         <Stack.Screen name="PasswordChange" component={PasswordChangeScreen}/>
-        <Stack.Screen
-        name="HomePage"
-        component={DrawerRoutes}
-        // Após login, podemos adicionar um fluxo para ir diretamente para essa tela
-        listeners={({ navigation }) => ({
-          focus: () => {
-            // Garantir que ao ir para o Drawer, ele não volte para o login
-            navigation.reset({
-              index: 0,
-              routes: [{ name: 'HomePage' }], // Redefine a pilha para HomePage
-            });
-          },
-        })}
-      />
+        <Stack.Screen name="HomePage" component={DrawerRoutes}/> 
        
     </Stack.Navigator>
   )
