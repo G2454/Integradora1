@@ -19,14 +19,7 @@ export default function HomeScreen() {
                 keyboardShouldPersistTaps="handled"
                 >
                     <View style={styles.container}>
-                        <TouchableOpacity onPress={() => navigation.navigate('Login')} style={styles.ReturnButton}>
-                            <Octicons
-                                name={"arrow-left"}
-                                size={30}
-                                color="#000"
-                            />
-                        </TouchableOpacity>
-
+                        
                         <Text> Bem vindo a HomePage :D </Text>
 
                     </View>

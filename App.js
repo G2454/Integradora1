@@ -1,7 +1,7 @@
 import './gesture-handler';
 import React, { useEffect } from 'react'
 import { NavigationContainer } from '@react-navigation/native'
-import Routes from './Routes/IndexRoutes'
+import Routes from './Routes/Index'
 import * as SplashScreen from 'expo-splash-screen';
 
 export default function App() {
