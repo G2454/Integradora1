@@ -1,10 +1,14 @@
 import React, { useEffect } from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { CommonActions } from '@react-navigation/native';
+import { DrawerContentScrollView } from '@react-navigation/drawer'; // Import necessário
+import { View, Text, Image, StyleSheet} from 'react-native'; // Importando os componentes necessários
 import HomeScreen from '../screens/HomeScreen/HomePage';
-import StackRoutes from './StackRoutes';
+import StackProfileRoutes from './StackProfileRoutes';
+import StackContactRoutes from './StackContactRoutes';
 
 const Drawer = createDrawerNavigator();
+
 
 function LogoutScreen({ navigation }) {
   useEffect(() => {
@@ -26,15 +30,25 @@ function LogoutScreen({ navigation }) {
 export default function DrawerRoutes() {
   return (
     <Drawer.Navigator>
-      <Drawer.Screen
-        name="Home "
+        <View >
+            <Text>Seu Nome</Text>
+        </View>
+    
+    <Drawer.Screen
+        name="Home"
         component={HomeScreen}
-        options={{ title: 'Todos os eventos', headerTitle: 'Eventos principais'}}
+        options={{ title: 'Todos os eventos', headerTitle: 'Eventos' }}
       />
 
       <Drawer.Screen
+        name= "Profile"
+        component={StackProfileRoutes}
+        options={{ title: 'Perfil', headerShown: false }}
+      />  
+
+      <Drawer.Screen
         name="Contact"
-        component={StackRoutes}
+        component={StackContactRoutes}
         options={{ title: 'Contato', headerShown: false }}
       />
 
@@ -46,3 +60,8 @@ export default function DrawerRoutes() {
     </Drawer.Navigator>
   );
 }
+
+const styles = StyleSheet.create({
+  
+ 
+})
