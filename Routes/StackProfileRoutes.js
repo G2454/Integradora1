@@ -14,7 +14,7 @@ export default function StackProfileRoutes() {
         options={({ navigation }) => ({
           headerShown: true,
           headerTitle: 'Perfil',
-          headerStyle: { backgroundColor: 'red' },
+          headerStyle: { backgroundColor: 'white' },
           headerTintColor: '#000',
           headerLeft: () => (
             <Ionicons

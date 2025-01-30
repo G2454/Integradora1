@@ -1,67 +1,128 @@
-import React, { useEffect } from 'react';
-import { createDrawerNavigator } from '@react-navigation/drawer';
+import React from 'react';
+import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList, DrawerItem } from '@react-navigation/drawer';
 import { CommonActions } from '@react-navigation/native';
-import { DrawerContentScrollView } from '@react-navigation/drawer'; // Import necessário
-import { View, Text, Image, StyleSheet} from 'react-native'; // Importando os componentes necessários
+import { View, Text, Image, StyleSheet, Dimensions } from 'react-native';
 import HomeScreen from '../screens/HomeScreen/HomePage';
 import StackProfileRoutes from './StackProfileRoutes';
 import StackContactRoutes from './StackContactRoutes';
+import Feather from '@expo/vector-icons/Feather';
+import Ionicons from '@expo/vector-icons/Ionicons';
 
 const Drawer = createDrawerNavigator();
 
-
-function LogoutScreen({ navigation }) {
-  useEffect(() => {
-    // Simule a lógica de logout (ex: limpar tokens, deslogar do backend)
-    console.log('Usuário deslogado!');
-
-    // Redefina a pilha de navegação para ir ao Login
-    navigation.dispatch(
+// Componente personalizado do Drawer
+function CustomDrawerContent(props) {
+  const handleLogout = () => {
+    props.navigation.dispatch(
       CommonActions.reset({
         index: 0,
-        routes: [{ name: 'Login' }], // Nome da tela de login na pilha de navegação
+        routes: [{ name: 'Login' }], // Redireciona diretamente para o Login
       })
     );
-  }, [navigation]);
+  };
 
-  return null; // Não precisa renderizar nada
+  return (
+    <DrawerContentScrollView {...props} contentContainerStyle={styles.drawerContainer}>
+      <View style={styles.drawerHeader}>
+        <Image
+          source={require('../src/assets/menuphoto.png')} // Certifique-se de que o caminho está correto
+          style={styles.profileImage}
+        />
+        <Text style={styles.username}>Fulano de Tal</Text>
+      </View>
+
+      {/* Itens de navegação */}
+      <DrawerItemList {...props} />
+
+      {/* Botão de logout na parte inferior */}
+      <View style={styles.logoutContainer}>
+        <DrawerItem
+          label="Sair"
+          onPress={handleLogout}
+          icon={({ color, size }) => <Ionicons name="log-in-outline" size={24} color="#767676" />}
+          labelStyle={{ color: '#000000', fontWeight: 'bold' }}
+          style={styles.logoutButton}
+        />
+      </View>
+    </DrawerContentScrollView>
+  );
 }
 
 export default function DrawerRoutes() {
   return (
-    <Drawer.Navigator>
-        <View >
-            <Text>Seu Nome</Text>
-        </View>
-    
-    <Drawer.Screen
+    <Drawer.Navigator
+      drawerContent={props => <CustomDrawerContent {...props} />}
+      screenOptions={{
+        drawerStyle: {
+          width: '100%', // Faz o Drawer ocupar a tela inteira
+          borderTopRightRadius: 0,
+          borderBottomRightRadius: 0, 
+        },
+        
+      }}
+    >
+      <Drawer.Screen
         name="Home"
         component={HomeScreen}
-        options={{ title: 'Todos os eventos', headerTitle: 'Eventos' }}
+        options={{ 
+          title: 'Todos os eventos',
+          headerTitle: 'Eventos',
+          drawerIcon: ({ color, size }) => <Feather name="calendar" size={24} color="#767676" />,
+        }}
       />
-
       <Drawer.Screen
-        name= "Profile"
+        name="Profile"
         component={StackProfileRoutes}
-        options={{ title: 'Perfil', headerShown: false }}
-      />  
-
+        options={{ 
+          title: 'Meu Perfil', 
+          headerShown: false,
+          drawerIcon: ({ color, size }) => <Feather name="user" size={24} color="#767676" />,
+        }}
+      />
       <Drawer.Screen
         name="Contact"
         component={StackContactRoutes}
-        options={{ title: 'Contato', headerShown: false }}
-      />
-
-      <Drawer.Screen
-        name="Log out"
-        component={LogoutScreen} // Usa o componente customizado para logout
-        options={{ title: 'Sair', headerShown: false, swipeEnabled: false, gestureEnabled: false }}
+        options={{ 
+          title: 'Contato', 
+          headerShown: false ,
+          drawerIcon: ({ color, size }) => <Feather name="mail" size={24} color="#767676" />,
+        }}
       />
     </Drawer.Navigator>
   );
 }
+// messsage-cicle é o ícone do contato bookmark é o icone de favoritados
 
+// Estilos do menu lateral
 const styles = StyleSheet.create({
-  
- 
-})
+  drawerContainer: {
+    flex: 1,
+    justifyContent: 'space-between',
+  },
+  drawerHeader: {
+    alignItems: 'left',
+    justifyContent: 'left',
+    paddingVertical: 20,
+    paddingLeft: 20,
+    marginBottom: 25,
+    backgroundColor: 'white',
+  },
+  profileImage: {
+    width: 113,
+    height: 113,
+    borderRadius: 40,
+    marginBottom: 10,
+    marginTop: 10,
+  },
+  username: {
+    fontSize: 19,
+    fontWeight: 'regular',
+    color: '#000000',
+  },
+  logoutContainer: {
+    marginTop: 'auto', // Empurra o botão para baixo
+    paddingVertical: 20,
+    paddingLeft: 10,
+    marginBottom: 40,
+  },
+});
