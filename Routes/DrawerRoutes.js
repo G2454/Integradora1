@@ -1,12 +1,15 @@
 import React from 'react';
 import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList, DrawerItem } from '@react-navigation/drawer';
 import { CommonActions } from '@react-navigation/native';
-import { View, Text, Image, StyleSheet, Dimensions } from 'react-native';
+import { View, Text, Image, StyleSheet,} from 'react-native';
 import HomeScreen from '../screens/HomeScreen/HomePage';
 import StackProfileRoutes from './StackProfileRoutes';
 import StackContactRoutes from './StackContactRoutes';
+import StackFavoriteRoutes from './StackFavoriteRoutes';
+import Event from '../screens/EventScreen/Event'; 
 import Feather from '@expo/vector-icons/Feather';
 import Ionicons from '@expo/vector-icons/Ionicons';
+import StackEventRoutes from './StackEvent';
 
 const Drawer = createDrawerNavigator();
 
@@ -40,7 +43,7 @@ function CustomDrawerContent(props) {
           label="Sair"
           onPress={handleLogout}
           icon={({ color, size }) => <Ionicons name="log-in-outline" size={24} color="#767676" />}
-          labelStyle={{ color: '#000000', fontWeight: 'bold' }}
+          labelStyle={{ color: '#000000', fontWeight: 'regular' }}
           style={styles.logoutButton}
         />
       </View>
@@ -64,25 +67,57 @@ export default function DrawerRoutes() {
       <Drawer.Screen
         name="Home"
         component={HomeScreen}
+        
         options={{ 
+          drawerLabelStyle: { color: '#000000' },
           title: 'Todos os eventos',
           headerTitle: 'Eventos',
+          headerTitleStyle: { 
+            fontSize: 24, // Altere para o tamanho desejado
+            fontWeight: 'regular', // Opcional, para destacar mais
+          },
           drawerIcon: ({ color, size }) => <Feather name="calendar" size={24} color="#767676" />,
         }}
       />
+
+      <Drawer.Screen
+        name="Event"
+        component={StackEventRoutes}
+        options={{ 
+          drawerLabelStyle: { color: '#000000' },
+          title: 'Criar evento',
+          headerShown: false,
+          headerTitle: 'Eventos',
+          drawerIcon: ({ color, size }) => <Feather name="message-circle" size={24} color="#767676" />,
+        }}
+      />
+
       <Drawer.Screen
         name="Profile"
         component={StackProfileRoutes}
         options={{ 
+          drawerLabelStyle: { color: '#000000' },
           title: 'Meu Perfil', 
           headerShown: false,
           drawerIcon: ({ color, size }) => <Feather name="user" size={24} color="#767676" />,
         }}
       />
       <Drawer.Screen
+        name="Favorite"
+        component={StackFavoriteRoutes}
+        options={{ 
+          drawerLabelStyle: { color: '#000000' },
+          title: 'Eventos favoritados', 
+          headerShown: false ,
+          drawerIcon: ({ color, size }) => <Feather name="bookmark" size={24} color="#767676" />,
+        }}
+      />
+
+      <Drawer.Screen
         name="Contact"
         component={StackContactRoutes}
         options={{ 
+          drawerLabelStyle: { color: '#000000' },
           title: 'Contato', 
           headerShown: false ,
           drawerIcon: ({ color, size }) => <Feather name="mail" size={24} color="#767676" />,
@@ -91,7 +126,7 @@ export default function DrawerRoutes() {
     </Drawer.Navigator>
   );
 }
-// messsage-cicle é o ícone do contato bookmark é o icone de favoritados
+
 
 // Estilos do menu lateral
 const styles = StyleSheet.create({

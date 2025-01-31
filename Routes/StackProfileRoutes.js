@@ -12,8 +12,12 @@ export default function StackProfileRoutes() {
         name="Meu perfil"
         component={Profile}
         options={({ navigation }) => ({
+          headerTitleStyle: { 
+            fontSize: 24, // Altere para o tamanho desejado
+            fontWeight: 'regular', // Opcional, para destacar mais
+          },
           headerShown: true,
-          headerTitle: 'Perfil',
+          headerTitle: 'Meu Perfil',
           headerStyle: { backgroundColor: 'white' },
           headerTintColor: '#000',
           headerLeft: () => (

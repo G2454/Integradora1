@@ -146,7 +146,7 @@ const styles = StyleSheet.create({
     elevation: 7,
   },
   buttonText: {
-    fontSize: 16,
+   fontSize: 16,
     color: "#FFF",
     fontWeight: "bold",
   },

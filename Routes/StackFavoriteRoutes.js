@@ -1,26 +1,26 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import Contact from '../screens/ContactScreen/Contact';
+import Favorite from '../screens/FavoriteScreen/Favorite';
 import { Ionicons } from '@expo/vector-icons';
 
 const Stack = createStackNavigator();
 
-export default function StackContactRoutes() {
+export default function StackFavoriteRoutes() {
   return (
     <Stack.Navigator>
       {/* Tela de Contato */}
       <Stack.Screen
-        name="Contato"
-        component={Contact}
+        name="Favoritos"
+        component={Favorite}
         options={({ navigation }) => ({
+          headerShown: true,
+          headerTitle: 'Eventos favoritados',
+          headerStyle: { backgroundColor: 'white' },
+          headerTintColor: '#000',
           headerTitleStyle: { 
             fontSize: 24, // Altere para o tamanho desejado
             fontWeight: 'regular', // Opcional, para destacar mais
           },
-          headerShown: true,
-          headerTitle: 'Contato',
-          headerStyle: { backgroundColor: 'white' },
-          headerTintColor: '#000',
           headerLeft: () => (
             <Ionicons
               name="arrow-back"
