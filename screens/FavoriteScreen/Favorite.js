@@ -4,7 +4,7 @@ import { SafeAreaView, TextInput, ActivityIndicator} from 'react-native';
 import { View, Text, StyleSheet, FlatList, Image} from 'react-native';
 import { useEffect, useState } from 'react';
 import filter from 'lodash.filter';
-    const API_ENDPOINT ='https://randomuser.me/api/?results=30';
+    const API_ENDPOINT ='https://randomuser.me/api/?results=1';
 
     export default function Favorite() {
         const [isLoading, setIsLoading] = useState(false);

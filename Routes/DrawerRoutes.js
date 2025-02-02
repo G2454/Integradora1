@@ -40,7 +40,7 @@ function CustomDrawerContent(props) {
     getUserData().then(data => {
       //console.log('Setting userData to:', data) // For debugging
       setUserData(data)
-      console.log(data)
+      //console.log(data)
     })
   }, [])
 
