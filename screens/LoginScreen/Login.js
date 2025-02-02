@@ -2,43 +2,44 @@ import { View, Text, StyleSheet, Image, TouchableOpacity, TextInput} from 'react
 import {useState} from 'react'
 import {Octicons} from '@expo/vector-icons'
 import { useNavigation } from '@react-navigation/native'
+import api from '../../api/api'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 export default function LoginScreen() {
 
+
+  const LOGIN_URL = '/login'
   const navigation = useNavigation();
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [passwordVisible, setPasswordVisible] = useState(false); // Estado para alternar visibilidade da senha
 
-  /*const handleLogin = async () => {
-    if (!email || !password) {
-      alert('Preencha todos os campos!');
-      return;
-    }
-  
-    try {
-      const userData = await AsyncStorage.getItem(email);
-  
-      if (userData) {
-        const user = JSON.parse(userData);
-  
-        if (user.password === password) {
-          alert(`Bem-vindo(a), ${user.name}!`);
-          navigation.navigate('Home'); // Navega para a tela inicial do app
-        } else {
-          alert('Senha incorreta!');
+ const handleLogin = async () => {
+    try{
+      const response = await api.post(
+        LOGIN_URL,
+        {email:email, password:password},
+        {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
         }
-      } else {
-        alert('E-mail não registrado!');
+      )
+      if(response.status === 200){
+        const userData = JSON.stringify([response.data.id, response.data.fullName, response.data.email, password]);
+        console.log(userData)
+        await AsyncStorage.setItem('UserDetails', userData)
+        navigation.navigate('HomePage')
+      }else{
+        alert("Houve um erro na autenticação, tente novamente")
       }
-    } catch (error) {
-      console.error('Erro ao fazer login:', error);
-      alert('Erro ao fazer login. Tente novamente.');
     }
-  }*/
+    catch(err){
+      alert(err)
+    }
+  }
 
-    // ou usa onPress=handleLogin na linha 93 se quiser usar a função de cima
+
 
   return (
     <View style = {styles.container}>
@@ -90,7 +91,7 @@ export default function LoginScreen() {
       </TouchableOpacity>
 
       <View style={styles.buttonPosition}  resizeMode='contain'>
-        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('HomePage')}> 
+        <TouchableOpacity style={styles.button} onPress={() => handleLogin()}> 
           <Text style={styles.buttonText}> ENTRAR </Text>
         </TouchableOpacity>
       </View>

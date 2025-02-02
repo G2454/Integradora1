@@ -4,9 +4,10 @@ import {useState} from 'react'
 import {Octicons} from '@expo/vector-icons'
 import { useNavigation } from '@react-navigation/native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import api from '../../api/api'
 
 export default function RegisterScreen() {
-
+  const REGISTER_URL = '/register'
   const navigation = useNavigation();
   const [name,setName] = useState('')
   const [email, setEmail] = useState('')
@@ -14,7 +15,9 @@ export default function RegisterScreen() {
   const [password2, setPassword2] = useState('')
   const [passwordVisible, setPasswordVisible] = useState(false) // Estado para alternar visibilidade da senha
   const [passwordVisible2, setPasswordVisible2] = useState(false)
-  /*const handleRegister = async () => {
+  
+  
+ const handleRegister = async () => {
     if (!name || !email || !password || !password2) {
       alert('Preencha todos os campos!')
       return
@@ -26,20 +29,30 @@ export default function RegisterScreen() {
     }
   
     try {
-      // Salva os dados do usuário no AsyncStorage
-      const userData = { name, email, password }
-      await AsyncStorage.setItem(email, JSON.stringify(userData))
-  
-      alert('Conta criada com sucesso!')
-      navigation.navigate('Login')
+      const response = await api.post(REGISTER_URL,
+        {
+          fullName: name,
+          email: email,
+          password: password
+        },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        withCredentials: true, // Corrected: it's withCredentials, not withCredential
+      }
+      )
+      if(response.status === 200){
+        alert('Conta criada com sucesso!')
+        navigation.navigate('Login')
+      }
+     
     } catch (error) {
       console.error('Erro ao salvar os dados:', error)
       alert('Erro ao criar conta. Tente novamente.')
       }
-  }*/
+  }
 
-
-     // ou usa onPress=handleRegister na linha 145 se quiser usar a função de cima
 
   return(
     <SafeAreaView style={{flex: 1}}>
@@ -142,7 +155,7 @@ export default function RegisterScreen() {
             </View>
 
             <View style={styles.buttonPosition}  resizeMode='contain'>
-              <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Login')}> 
+              <TouchableOpacity style={styles.button} onPress={() => handleRegister()}> 
                 <Text style={styles.buttonText}> CRIAR CONTA </Text>
               </TouchableOpacity>
             </View>

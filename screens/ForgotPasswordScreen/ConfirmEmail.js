@@ -1,33 +1,46 @@
 import { View, Text, TextInput, StyleSheet, TouchableOpacity, 
 KeyboardAvoidingView, Platform, ScrollView, SafeAreaView, StatusBar } from 'react-native'
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 import {Octicons} from '@expo/vector-icons'
 import { useNavigation } from '@react-navigation/native'
+import api from '../../api/api'
 
 export default function ForgotPasswordScreen() {
 
     const navigation = useNavigation()
     const [email, setEmail] = useState('')
-    /*const handleEmailConfirmation = async () => {
+    const EMAIL_URL = '/emails'
+
+
+  
+    function findMatch(array, valueToCompare) {
+        return array.includes(valueToCompare);
+    }
+
+    const handleEmailConfirmation = async () => {
         if (!email) {
           alert('Digite o e-mail!')
           return
         }
-      
         try {
-          // Verifica se o e-mail está registrado no AsyncStorage
-          const userData = await AsyncStorage.getItem(email)
-      
-          if (userData) {
-            navigation.navigate('PasswordChange') // Avança para a tela de redefinição de senha
-          } else {
-            alert('E-mail não registrado!')
-          }
-        } catch (error) {
-          console.error('Erro ao verificar o e-mail:', error)
-          alert('Erro ao confirmar o e-mail. Tente novamente.')
+        const response = await api.get(EMAIL_URL,{
+            headers: { "Content-Type": "application/json" },
+        })
+        const userData = JSON.stringify(response.data.emails);
+        //console.log(userData)
+        if(findMatch(userData,email) == true){
+            navigation.navigate('PasswordChange', { userEmail: email })  // Pass email as parameter
+        }else{
+            alert('Usuário não cadastrado')
         }
-    }*/
+        console.log(findMatch(userData,email))
+         //navigation.navigate('PasswordChange')
+
+
+        } catch (error) {
+         alert(error)
+        }
+    }
 
      // ou usa onPress=handleEmailConfirmation na linha 79 se quiser usar a função de cima
 
@@ -76,7 +89,7 @@ export default function ForgotPasswordScreen() {
                         </View>
 
                         <View style={styles.buttonPosition}  resizeMode='contain'>
-                            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('PasswordChange')}>
+                            <TouchableOpacity style={styles.button} onPress={() => handleEmailConfirmation()}>
                                 <Text style={styles.buttonText}> ENVIAR </Text>
                             </TouchableOpacity>
                         </View>

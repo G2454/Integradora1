@@ -1,17 +1,43 @@
 import { View, Text, TextInput, StyleSheet, TouchableOpacity, 
 KeyboardAvoidingView, Platform, ScrollView, SafeAreaView, StatusBar } from 'react-native'
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 import {Octicons} from '@expo/vector-icons'
-import { useNavigation } from '@react-navigation/native'
+import { useNavigation, useRoute } from '@react-navigation/native'
+import api from '../../api/api'
     
 export default function PasswordScreen() {
     
     const navigation = useNavigation()
+    const route = useRoute()  // Add this line to get access to route params
+    const { userEmail } = route.params  
     const [password, setPassword] = useState('')
     const [password2, setPassword2] = useState('')
     const [passwordVisible, setPasswordVisible] = useState(false) // Estado para alternar visibilidade da senha
     const [passwordVisible2, setPasswordVisible2] = useState(false)
-    
+
+    const handlePasswordChange = async ()=>{
+        if (!password || !password2) {
+            alert('Preencha ambos os campos de senha!')
+            return
+        }
+        if (password !== password2) {
+            alert('As senhas não coincidem!')
+            return
+        }
+        try {
+            // Make API request to change password
+            const response = await api.put(`/change-password/${userEmail}`, {
+                newPassword: password
+            })
+            alert('Senha alterada com sucesso!')
+            navigation.navigate('Login')
+        } catch (error) {
+            // Handle different types of errors
+            const errorMessage = error.response?.data?.error || 'Erro ao alterar a senha'
+            alert(errorMessage)
+        }
+    }
+
     return(
         <SafeAreaView style={{flex: 1}}>
             <StatusBar barStyle="dark-content" backgroundColor="#fff" />
@@ -83,7 +109,7 @@ export default function PasswordScreen() {
                         </View>
 
                         <View style={styles.buttonPosition}  resizeMode='contain'>
-                            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Login')}>
+                            <TouchableOpacity style={styles.button} onPress={() => handlePasswordChange()}>
                                 <Text style={styles.buttonText}> ALTERAR A SENHA </Text>
                             </TouchableOpacity>
                         </View>
