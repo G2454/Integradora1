@@ -1,4 +1,5 @@
 import React from 'react';
+import {useEffect, useState} from 'react'
 import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList, DrawerItem } from '@react-navigation/drawer';
 import { CommonActions } from '@react-navigation/native';
 import { View, Text, Image, StyleSheet,} from 'react-native';
@@ -10,11 +11,40 @@ import Event from '../screens/EventScreen/Event';
 import Feather from '@expo/vector-icons/Feather';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import StackEventRoutes from './StackEvent';
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 const Drawer = createDrawerNavigator();
 
+
+ 
 // Componente personalizado do Drawer
 function CustomDrawerContent(props) {
+
+  const [userData, setUserData] = useState([])
+
+
+  const getUserData = async () => {
+    try {
+      const jsonValue = await AsyncStorage.getItem('UserDetails')
+      //console.log('Retrieved value:', jsonValue) // For debugging
+      const parsedValue = jsonValue != null ? JSON.parse(jsonValue) : null
+      //console.log('Parsed value:', parsedValue) // For debugging
+      return parsedValue
+    } catch(e) {
+      console.error('Error reading data from storage:', e)
+      return null
+    }
+  }
+
+  useEffect(() => {
+    getUserData().then(data => {
+      //console.log('Setting userData to:', data) // For debugging
+      setUserData(data)
+      console.log(data)
+    })
+  }, [])
+
+
   const handleLogout = () => {
     props.navigation.dispatch(
       CommonActions.reset({
@@ -31,7 +61,7 @@ function CustomDrawerContent(props) {
           source={require('../src/assets/menuphoto.png')} // Certifique-se de que o caminho está correto
           style={styles.profileImage}
         />
-        <Text style={styles.username}>Fulano de Tal</Text>
+        <Text style={styles.username}>{userData[1]}</Text>
       </View>
 
       {/* Itens de navegação */}
@@ -52,6 +82,11 @@ function CustomDrawerContent(props) {
 }
 
 export default function DrawerRoutes() {
+
+
+
+
+
   return (
     <Drawer.Navigator
       drawerContent={props => <CustomDrawerContent {...props} />}

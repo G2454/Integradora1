@@ -27,7 +27,7 @@ export default function LoginScreen() {
       )
       if(response.status === 200){
         const userData = JSON.stringify([response.data.id, response.data.fullName, response.data.email, password]);
-        console.log(userData)
+        //console.log(userData)
         await AsyncStorage.setItem('UserDetails', userData)
         navigation.navigate('HomePage')
       }else{

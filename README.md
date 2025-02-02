@@ -10,12 +10,11 @@ O projeto consiste num aplicativo para dispositivos móveis (Android) em que vai
 
 ## Tecnologias utilizadas
 
-Dillinger uses a number of open source projects to work properly:
-
 - React Native - Framework para o Front-End
 - Expo - Plataforma para prototipação
 - NodeJS - Interpretador necessário tanto para o Back-End como o Front-End
-- DEFINIR - Back-End
+- Express - Framework para fazer o backend
+- SQLITE - Banco de dados leve que vai armazenar os usuários e eventos
 - Figma - Protótipo de Alta fidelidade
 - Excalidraw - Protótipo de Baixa Fidelidade
 - GitHub Projects - Quadro de Kanban utilizado para fazer o acompanhamento do projeto

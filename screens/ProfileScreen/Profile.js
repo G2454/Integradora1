@@ -1,9 +1,35 @@
 import React from 'react';
+import {useEffect, useState} from 'react'
+
 import { StyleSheet, TouchableOpacity, View, Text, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/Feather';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Profile() {
+    const [userData, setUserData] = useState([])
+
+
+    const getUserData = async () => {
+      try {
+        const jsonValue = await AsyncStorage.getItem('UserDetails')
+        //console.log('Retrieved value:', jsonValue) // For debugging
+        const parsedValue = jsonValue != null ? JSON.parse(jsonValue) : null
+        //console.log('Parsed value:', parsedValue) // For debugging
+        return parsedValue
+      } catch(e) {
+        console.error('Error reading data from storage:', e)
+        return null
+      }
+    }
+  
+    useEffect(() => {
+      getUserData().then(data => {
+        //console.log('Setting userData to:', data) // For debugging
+        setUserData(data)
+        console.log(data)
+      })
+    }, [])
     return (
         <SafeAreaView style={styles.container}>
 
@@ -15,26 +41,19 @@ export default function Profile() {
             />
 
             <View>
-                <Text style={styles.username}>Ashfak Sayem</Text>
+                <Text style={styles.username}>{userData[1]}</Text>
             </View>
 
             {/* Email e senha com alinhamento à esquerda */}
             <View style={styles.infoContainer}>
                 <Text style={styles.infoText}>
-                    email: <Text style={styles.underlineText}>doasjdsaiodj</Text>
+                    email: <Text style={styles.underlineText}>{userData[2]}</Text>
                 </Text>
                 <Text style={styles.infoText}>
-                    senha: <Text>senha</Text>
+                    senha: <Text>{userData[3]}</Text>
                 </Text>
             </View>
-
-            {/* Botão de editar perfil */}
-            <TouchableOpacity style={styles.button}>
-                <Icon name="edit" size={20} color="orange" style={styles.icon} />
-                <Text style={styles.buttonText}>Edit Profile</Text>
-            </TouchableOpacity>
-
-        </SafeAreaView>
+            </SafeAreaView>
     );
 }
 
