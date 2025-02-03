@@ -7,11 +7,7 @@ import api from '../../api/api'
 export default function HomeScreen() {
     const navigation = useNavigation();
     const EVENTS_URL = '/events'
-    const DATA = [
-        { id: 1, name: "Aula Teórica", date: "10/08/2025", time: "10:00", place: "Sala 99", description: "Aula teórica de matemática" },
-        { id: 2, name: "Física 2", date: "05/08/2025", time: "15:27", place: "Sala 501", description: "Aula com o professor Yuri" },
-        { id: 3, name: "Cálculo Numérico", date: "30/08/2025", time: "12:30", place: "Sala 20", description: "Aula de geometria UTFPR" },
-    ];
+  
 
     const [events, setEvents] = useState([])
 
@@ -29,7 +25,11 @@ export default function HomeScreen() {
     };
 
     useEffect(() => {
-        fetchEvents();
+        setTimeout(()=>{
+            fetchEvents(); 
+           }, 1000)
+
+        
     }, []);
 
 
@@ -53,6 +53,7 @@ export default function HomeScreen() {
                         renderItem={({ item }) => <Item title={item.name} date={item.date} place={item.place} time={item.time}/>}
                         keyExtractor={(item) => String(item.id)}
                         style={styles.flatlist}
+                        scrollEnabled
                         
                     />
                 </View>
@@ -79,13 +80,13 @@ const styles = StyleSheet.create({
 
     },
     item: {
-        backgroundColor: '#FFD289',
+        backgroundColor: '#A3BBAD',
         padding: 15,
         marginVertical: 8,
         marginHorizontal: 16,
         borderRadius: 8,
         borderWidth:1,
-        borderColor:'#FACC6B'
+        borderColor:'#357266',
     },
     title: {
         fontSize: 16,
