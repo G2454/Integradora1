@@ -5,7 +5,8 @@ O projeto consiste num aplicativo para dispositivos móveis (Android) em que vai
 ## Funcionalidades
 
 - Cadastro e Login de usuários
-- Cadastro, alteração e exclusão de eventos
+- Cadastro de eventos
+- Favoritar eventos
 - Visualização detalhada dos eventos que vão acontecer ou já aconteceram
 
 ## Tecnologias utilizadas
@@ -16,7 +17,6 @@ O projeto consiste num aplicativo para dispositivos móveis (Android) em que vai
 - Express - Framework para fazer o backend
 - SQLITE - Banco de dados leve que vai armazenar os usuários e eventos
 - Figma - Protótipo de Alta fidelidade
-- Excalidraw - Protótipo de Baixa Fidelidade
 - GitHub Projects - Quadro de Kanban utilizado para fazer o acompanhamento do projeto
 
 ## Instalação
