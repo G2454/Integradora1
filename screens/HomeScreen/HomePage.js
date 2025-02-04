@@ -7,10 +7,24 @@ import api from '../../api/api';
 export default function HomeScreen() {
     const navigation = useNavigation();
     const EVENTS_URL = '/events';
-    
+
+    const [userData, setUserData] = useState([])
     const [events, setEvents] = useState([]);
     const [selectedEvent, setSelectedEvent] = useState(null);
     const [modalVisible, setModalVisible] = useState(false);
+
+    const getUserData = async () => {
+        try {
+          const jsonValue = await AsyncStorage.getItem('UserDetails')
+          //console.log('Retrieved value:', jsonValue) // For debugging
+          const parsedValue = jsonValue != null ? JSON.parse(jsonValue) : null
+          console.log('Parsed value:', parsedValue) // For debugging
+          return parsedValue
+        } catch(e) {
+          console.error('Error reading data from storage:', e)
+          return null
+        }
+      }
 
     const fetchEvents = async () => {
         try {
@@ -19,17 +33,35 @@ export default function HomeScreen() {
             });
             const EventsData = JSON.stringify(response.data);
             await AsyncStorage.setItem('EventDetails', EventsData);
-            console.log("Fetched Events:", response.data);
+            //console.log("Fetched Events:", response.data);
             setEvents(response.data);
         } catch (e) {
             console.error("Error fetching events:", e);
         }
     };
 
+    const favoriteEvent = async (selectedEventId) =>{
+        try{
+            const response = await api.put(`/users/${userData[0]}/favorite-event`,{
+                eventId: selectedEventId
+            })
+            if(response.status === 200){
+                alert('Evento favoritado com sucesso')
+            }
+        }catch(err){
+            console.log(err)
+        }
+    }
+
     useEffect(() => {
         setTimeout(() => {
             fetchEvents();
         }, 1000);
+        getUserData().then(data => {
+            //console.log('Setting userData to:', data) // For debugging
+            setUserData(data)
+            //console.log(data)
+          })
     }, []);
 
     const openModal = (event) => {
@@ -100,15 +132,13 @@ export default function HomeScreen() {
                                     <Text style={{fontSize:20, marginBottom:20, marginTop:60}}>Sobre o evento:</Text>
                                     <Text>{selectedEvent.description}</Text>
                                     <View style={{top:60}}>
-                                    <TouchableOpacity style={[styles.closeButton, {backgroundColor:'#DAAE19'}]} onPress={closeModal}>
+                                    <TouchableOpacity style={[styles.closeButton, {backgroundColor:'#DAAE19'}]} onPress={() => favoriteEvent(selectedEvent.id)}>
                                         <Text style={styles.closeButtonText}>Favoritar</Text>
                                     </TouchableOpacity>
                                     <TouchableOpacity style={[styles.closeButton,{backgroundColor:'#CF3030'}]} onPress={closeModal}>
                                         <Text style={styles.closeButtonText}>Voltar</Text>
                                     </TouchableOpacity>
-                                    <TouchableOpacity style={[styles.closeButton,{backgroundColor:'#30CF82'}]} onPress={closeModal}>
-                                        <Text style={styles.closeButtonText}>Editar</Text>
-                                    </TouchableOpacity>
+                                   
                                     </View>
                                 </View>
                             </>
@@ -166,7 +196,7 @@ const styles = StyleSheet.create({
 
     },
     closeButton: {
-        marginTop: 40,
+        marginTop: 20,
         backgroundColor: '#357266',
         padding: 10,
         borderRadius: 10,
