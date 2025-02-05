@@ -2,7 +2,7 @@ import axios from 'axios'
 
 
 const api = axios.create({
-    baseURL: "", //colocar o IPV4 ou o IP do backend
+    baseURL: "http://192.168.1.100:3000/", //colocar o IPV4 ou o IP do backend
     timeout: 10000, // Increased timeout to 10 seconds
     timeoutErrorMessage: "A conexão demorou muito para responder",
   });

@@ -29,10 +29,11 @@ export default function Favorite() {
 
     useEffect(() => {
         setTimeout(()=>{
-            fetchData();
-        },2000)
-        
-    }, []);
+            fetchData(); 
+
+        }, 5000)
+  
+    }, [data]);
 
     const fetchData = async () => {
         try {
@@ -43,11 +44,12 @@ export default function Favorite() {
             if (response.status === 200) {
                 setFullData(response.data.favoritedEvents);
                 setData(response.data.favoritedEvents);
-                setIsLoading(false);
+   
             }
         } catch (err) {
+            console.log(response.status)
             alert("Error fetching data");
-            setIsLoading(false);
+  
         }
     };
 
@@ -60,13 +62,7 @@ export default function Favorite() {
         setData(filteredData);
     };
 
-    if (isLoading) {
-        return (
-            <View style={styles.loaderContainer}>
-                <ActivityIndicator size="large" color="#0000ff" />
-            </View>
-        );
-    }
+   
 
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: '#FFFFFF' }}>
